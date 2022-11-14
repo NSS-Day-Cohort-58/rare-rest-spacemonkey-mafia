@@ -35,7 +35,8 @@ class PostView(ViewSet):
         Returns
             Response -- JSON serialized post instance
         """
-        author = Author.objects.get(user=request.auth.user)
+        #~ these will need to be updated once the Authentication is Running.
+        # author = Author.objects.get(user=request.auth.user)
         # category = Catergory.objects.get(pk=request.data["category"])
 
         post = Post.objects.create(
@@ -67,7 +68,7 @@ class PostView(ViewSet):
 
         # category = Catergory.objects.get(pk=request.data["category"])
         # post.category = request.data["category"]
-        post.post = post
+        
         post.save()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)  
