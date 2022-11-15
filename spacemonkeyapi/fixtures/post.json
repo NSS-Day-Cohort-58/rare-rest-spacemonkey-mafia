@@ -1,0 +1,26 @@
+[
+    {
+        "model": "spacemonkeyapi.post",
+        "pk": 1,
+        "fields": {
+            "author": 1,
+            "title": "The space is full of Mafia dudes",
+            "publication_date": "2022-11-14",
+            "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
+            "content": "What about that content",
+            "approved": "True"
+        }
+    },
+    {
+        "model": "spacemonkeyapi.post",
+        "pk": 2,
+        "fields": {
+            "author": 1,
+            "title": "The space station of your dreams",
+            "publication_date": "2022-11-14",
+            "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
+            "content": "What about that space content",
+            "approved": "True"
+        }
+    }
+]
