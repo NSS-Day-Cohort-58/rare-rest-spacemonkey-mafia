@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'spacemonkeyapi',
 ]
 
-#~ This is for when AUTHNTICATION IS COMPLETED
+#~ This is for when AUTHENTICATION IS COMPLETED
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
 #         'rest_framework.authentication.TokenAuthentication',
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 #     ],
 # }
 
-#~ Comment out when AUTHNTICATION IS COMPLETED and uncomment the above
+#~ Comment out when AUTHENTICATION IS COMPLETED and uncomment the above
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
