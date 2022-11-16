@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import include
+from django.conf.urls import include
+from rest_framework import routers
 from django.urls import path
 from rest_framework import routers
 from spacemonkeyapi.views import PostView, CategoryView
+from spacemonkeyapi.views import register_user, login_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostView, 'post')
@@ -25,6 +28,8 @@ router.register(r'categories', CategoryView, 'category')
 
 
 urlpatterns = [
+    path('register', register_user),
+    path('login', login_user),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 ]

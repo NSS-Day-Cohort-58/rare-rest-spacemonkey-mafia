@@ -1,0 +1,11 @@
+[
+    {
+        "model": "spacemonkeyapi.author",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "This is my bio",
+            "profile_image":""
+        }
+    }
+]
