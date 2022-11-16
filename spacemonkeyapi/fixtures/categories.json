@@ -1,0 +1,42 @@
+
+   [ {
+        "model": "spacemonkeyapi.category",
+        "pk": 1,
+        "fields": {
+            "label": "News"
+           
+        }
+    },
+    {
+        "model": "spacemonkeyapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Sports"
+           
+        }
+    },
+    {
+        "model": "spacemonkeyapi.category",
+        "pk": 3,
+        "fields": {
+            "label": "Family"
+           
+        }
+    },
+    {
+        "model": "spacemonkeyapi.category",
+        "pk": 4,
+        "fields": {
+            "label": "Foodie"
+           
+        }
+    },
+    {
+        "model": "spacemonkeyapi.category",
+        "pk": 5,
+        "fields": {
+            "label": "Jobs"
+           
+        }
+    }
+]
