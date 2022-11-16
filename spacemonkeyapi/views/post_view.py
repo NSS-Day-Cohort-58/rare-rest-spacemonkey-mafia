@@ -2,7 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from spacemonkeyapi.models import Post, Author
+from spacemonkeyapi.models import Post, Author, Category
 
 
 class PostView(ViewSet):
@@ -24,7 +24,13 @@ class PostView(ViewSet):
         Returns:
             Response -- JSON serialized list of post types
         """
-        post_view = Post.objects.all()
+
+        if "category" in request.query_params:
+            post_view = Post.objects.filter(category__id=request.query_params['category'])
+        
+        else:
+            post_view = Post.objects.all()
+
         serialized = PostSerializer(post_view, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
 
@@ -37,11 +43,11 @@ class PostView(ViewSet):
         """
         #~ these will need to be updated once the Authentication is Running.
         # author = Author.objects.get(user=request.auth.user)
-        # category = Catergory.objects.get(pk=request.data["category"])
+        category = Category.objects.get(pk=request.data["category"])
 
         post = Post.objects.create(
             author=request.data["author"],
-            # category=category,
+            category=category,
             title=request.data["title"],
             publication_date=request.data["publication_date"],
             image_url=request.data["image_url"],
@@ -85,4 +91,4 @@ class PostView(ViewSet):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved')
+        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'category', )

@@ -4,6 +4,7 @@
         "pk": 1,
         "fields": {
             "author": 1,
+            "category": 1,
             "title": "The space is full of Mafia dudes",
             "publication_date": "2022-11-14",
             "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
@@ -16,6 +17,7 @@
         "pk": 2,
         "fields": {
             "author": 1,
+            "category": 2,
             "title": "The space station of your dreams",
             "publication_date": "2022-11-14",
             "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
