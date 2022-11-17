@@ -2,7 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from spacemonkeyapi.models import Post, Author, Category
+from spacemonkeyapi.models import Post, Category
 
 
 class PostView(ViewSet):
@@ -88,7 +88,14 @@ class PostView(ViewSet):
 
     
 
+# class AuthorSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Author
+#         fields = ('id', 'full_name',)
+
+
 class PostSerializer(serializers.ModelSerializer):
+    # author= AuthorSerializer(many=False)
     class Meta:
         model = Post
         fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'category', )
