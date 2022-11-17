@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from spacemonkeyapi.models import Comment, Post, Author
+from spacemonkeyapi.models import Comment, Post, RareUser
 
 class CommentView(ViewSet):
     def create(self, request, pk):
@@ -13,7 +13,7 @@ class CommentView(ViewSet):
             Response -- JSON serialized post instance
         """
         post = Post.objects.get(pk=pk)
-        author = Author.objects.get(user=request.auth.user)
+        author = RareUser.objects.get(user=request.auth.user)
         comment = Comment.objects.create(
             post=post,
             author=author,
@@ -25,7 +25,7 @@ class CommentView(ViewSet):
     
     def destroy(self, request, pk):
         """Delete request for a user to delete a comment on a post"""
-        author = Author.objects.get(user=request.auth.user)
+        author = RareUser.objects.get(user=request.auth.user)
         comment = Comment.objects.get(pk=pk, author=author)
         comment.delete()
 
@@ -62,7 +62,7 @@ class CommentView(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        author = Author.objects.get(user=request.auth.user)
+        author = RareUser.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=request.data["post"])
         comment = Comment.objects.get(pk=pk, author=author, post=post)
         comment.content = request.data["content"]
