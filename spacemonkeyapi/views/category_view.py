@@ -2,7 +2,6 @@
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.decorators import action
-
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from spacemonkeyapi.models.category import Category
@@ -10,22 +9,7 @@ from spacemonkeyapi.models.category import Category
 
 class CategoryView(ViewSet):
     """spacemonkey category view"""
-    @action(methods=['post'], detail=True)
-    def keep(self, request, pk):
-        """Post request for a user to keep a category"""
-    
-        category = Category.objects.get(pk=pk)
-        category.label.add(category)
-        return Response({'message': 'Category Kept'}, status=status.HTTP_201_CREATED)
-    
-    @action(methods=['delete'], detail=True)
-    def remove(self, request, pk):
-        """Delete request for a user to remove a category"""
-    
-        category = Category.objects.get(pk=pk)
-        category.label.remove(category)
-        return Response({'message': 'Category Deleted'}, status=status.HTTP_201_CREATED)
-    
+     
     def list(self, request):
         """Handle GET requests to get all categories
 
