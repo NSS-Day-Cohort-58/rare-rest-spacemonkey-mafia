@@ -5,7 +5,8 @@
         "fields": {
             "user": 1,
             "bio": "This is my bio",
-            "profile_image":""
+            "profile_image":"",
+            "age": 35
         }
     }
 ]

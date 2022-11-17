@@ -1,0 +1,41 @@
+[ {
+    "model": "spacemonkeyapi.tag",
+    "pk": 1,
+    "fields": {
+        "name": "Wooowza"
+       
+    }
+},
+{
+    "model": "spacemonkeyapi.tag",
+    "pk": 2,
+    "fields": {
+        "name": "Great"
+       
+    }
+},
+{
+    "model": "spacemonkeyapi.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Awesome"
+       
+    }
+},
+{
+    "model": "spacemonkeyapi.tag",
+    "pk": 4,
+    "fields": {
+        "name": "Cool"
+       
+    }
+},
+{
+    "model": "spacemonkeyapi.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Neat"
+       
+    }
+}
+]

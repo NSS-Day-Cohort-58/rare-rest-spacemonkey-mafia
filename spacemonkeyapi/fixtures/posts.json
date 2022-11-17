@@ -8,7 +8,9 @@
             "publication_date": "2022-11-14",
             "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
             "content": "What about that content",
-            "approved": "True"
+            "approved": "True",
+            "comments": [],
+            "tags": []
         }
     },
     {
@@ -20,7 +22,10 @@
             "publication_date": "2022-11-14",
             "image_url": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-svg-vector.svg",
             "content": "What about that space content",
-            "approved": "True"
+            "approved": "True",
+            "comments": [],
+            "tags": []
+
         }
     }
 ]
