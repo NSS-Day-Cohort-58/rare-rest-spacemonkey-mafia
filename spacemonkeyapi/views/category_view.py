@@ -1,13 +1,15 @@
 """View module for handling requests about categories"""
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from spacemonkeyapi.models.category import Category
 
 
 class CategoryView(ViewSet):
-    """Tuna category view"""
+    """spacemonkey category view"""
+     
     def list(self, request):
         """Handle GET requests to get all categories
 
@@ -40,6 +42,11 @@ class CategoryView(ViewSet):
 
         serialized = CategorySerializer(new_category, many=False)
         return Response(serialized.data, status=status.HTTP_201_CREATED)
+
+    def destroy(self, request, pk=None):
+        category = Category.objects.get(pk=pk)
+        category.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories
