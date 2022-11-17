@@ -38,10 +38,6 @@ class RareUserView(ViewSet):
 
 class RareUserSerializer(serializers.ModelSerializer):
 
-    date_joined= serializers.DateTimeField(
-        "%x"
-    )
-
     class Meta:
         model = RareUser
-        fields = ('id','username','email', 'author', 'date_joined')
+        fields = ('id', 'bio',)

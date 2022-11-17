@@ -38,8 +38,12 @@ class CommentView(ViewSet):
             Response -- JSON serialized list of all comments for a post
         """
         #view for comments on a post
-        post = Post.objects.get(pk=request.query_params.get('pk', None))
-        comments = Comment.objects.all().filter(post=post)
+
+        if "post" in request.query_params:
+            comments = Comment.objects.filter(post__id=request.query_params['post'])
+
+        else:
+            comments = Comment.objects.all()
 
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
@@ -81,5 +85,5 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'author', 'content', 'created_on')
+        fields = ('id', 'author', 'content', 'created_on')
         depth = 1
