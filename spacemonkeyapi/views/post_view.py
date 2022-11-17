@@ -1,8 +1,9 @@
+from rest_framework.decorators import action
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from spacemonkeyapi.models import Post, Category
+from spacemonkeyapi.models import Post, RareUser, Tag, Comment
 
 
 class PostView(ViewSet):
@@ -86,7 +87,20 @@ class PostView(ViewSet):
             post.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
 
-    
+    #create a posttag in the post view
+    @action(methods=['post', 'delete'], detail=True)
+    def posttag(self, request, pk=None):
+        """Managing post tags"""
+        post = Post.objects.get(pk=pk)
+        if request.method == "POST":
+            tag = Tag.objects.get(pk=request.data["tagId"])
+            post.tags.add(tag)
+            return Response({"Tag has been added"}, status=status.HTTP_204_NO_CONTENT)
+        elif request.method == "DELETE":
+            tag = Tag.objects.get(pk=request.data["tagId"])
+            post.tags.remove(tag)
+            return Response({"Tag has been removed"}, status=status.HTTP_204_NO_CONTENT)
+
 
 # class AuthorSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -98,4 +112,4 @@ class PostSerializer(serializers.ModelSerializer):
     # author= AuthorSerializer(many=False)
     class Meta:
         model = Post
-        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'category', )
+        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'tags', 'comments')

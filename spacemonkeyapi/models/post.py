@@ -8,3 +8,6 @@ class Post(models.Model):
     image_url = models.URLField(max_length=200)
     content = models.CharField(max_length=155)
     approved =  models.BooleanField()
+    author = models.ForeignKey("RareUser", on_delete=models.CASCADE, related_name="posts")
+    
+    tags = models.ManyToManyField("Tag", through="PostTag" )
