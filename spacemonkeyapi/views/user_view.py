@@ -40,4 +40,4 @@ class RareUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RareUser
-        fields = ('id', 'bio',)
+        fields = ('id', 'full_name','bio','profile_image', )

@@ -107,9 +107,20 @@ class PostView(ViewSet):
 #         model = Author
 #         fields = ('id', 'full_name',)
 
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RareUser
+        fields = ('id', 'full_name', )
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'label', )
+
 
 class PostSerializer(serializers.ModelSerializer):
-    # author= AuthorSerializer(many=False)
+    author= AuthorSerializer(many=False)
+    category = CategorySerializer(many=False)
     class Meta:
         model = Post
-        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'tags', 'comments')
+        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'tags', 'comments', 'category',)
