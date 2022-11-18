@@ -1,7 +1,6 @@
 from django.db import models
 
 class Post(models.Model):
-    author = models.CharField(max_length=155)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=155)
     publication_date = models.DateField(null=True, blank=True, auto_now=False, auto_now_add=False)
@@ -11,3 +10,11 @@ class Post(models.Model):
     author = models.ForeignKey("RareUser", on_delete=models.CASCADE, related_name="posts")
     
     tags = models.ManyToManyField("Tag", through="PostTag" )
+
+    @property 
+    def is_author(self):
+        return self.__author
+
+    @is_author.setter
+    def is_author(self, value):
+        self.__author = value

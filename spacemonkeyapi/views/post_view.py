@@ -1,5 +1,6 @@
 from rest_framework.decorators import action
 from django.http import HttpResponseServerError
+from django.db.models import Case, When, Value, IntegerField, BooleanField
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
@@ -14,7 +15,15 @@ class PostView(ViewSet):
         Returns:
             Response -- JSON serialized post type
         """
+        rare_user = RareUser.objects.get(user=request.auth.user)
         post_view = Post.objects.get(pk=pk)
+        
+        post_view.is_author = False
+
+        if post_view.author == rare_user:
+            post_view.is_author = True
+
+
         serialized = PostSerializer(post_view, context={'request': request})
         return Response(serialized.data, status=status.HTTP_200_OK)
 
@@ -25,13 +34,19 @@ class PostView(ViewSet):
         Returns:
             Response -- JSON serialized list of post types
         """
+        rare_user = RareUser.objects.get(user=request.auth.user)
+
+        post_view = Post.objects.annotate(
+               is_author=Case(
+                   When(author=rare_user,
+                        then=Value(True)),
+                   default=Value(False),
+                   output_field=BooleanField())) \
+                .all()
 
         if "category" in request.query_params:
             post_view = Post.objects.filter(category__id=request.query_params['category'])
         
-        else:
-            post_view = Post.objects.all()
-
         serialized = PostSerializer(post_view, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
 
@@ -43,16 +58,18 @@ class PostView(ViewSet):
             Response -- JSON serialized post instance
         """
         #~ these will need to be updated once the Authentication is Running.
-        # author = Author.objects.get(user=request.auth.user)
+        author = RareUser.objects.get(user=request.auth.user)
         category = Category.objects.get(pk=request.data["category"])
+        tag = Tag.objects.get(pk=request.data["tag"])
 
         post = Post.objects.create(
-            author=request.data["author"],
+            author=author,
             category=category,
             title=request.data["title"],
             publication_date=request.data["publication_date"],
             image_url=request.data["image_url"],
             content=request.data["content"],
+            tag=tag,
             approved=request.data["approved"],
         )
         serializer = PostSerializer(post)
@@ -123,4 +140,7 @@ class PostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(many=False)
     class Meta:
         model = Post
-        fields = ('id', 'author','title', 'publication_date', 'image_url', 'content', 'approved', 'tags', 'comments', 'category',)
+        fields = ('id', 'author', 'is_author',
+        'title', 'publication_date', 'image_url', 'content', 
+        'approved', 'tags', 'comments', 'category',)
+        depth = 1
