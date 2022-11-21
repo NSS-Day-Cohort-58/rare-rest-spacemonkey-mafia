@@ -4,6 +4,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from spacemonkeyapi.models import RareUser
+from django.contrib.auth.models import User
 
 
 class RareUserView(ViewSet):
@@ -35,9 +36,8 @@ class RareUserView(ViewSet):
 
 
 
-
 class RareUserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = RareUser
-        fields = ('id', 'bio',)
+        fields = ('id', 'full_name','bio','profile_image', 'user',)
+        # depth=1

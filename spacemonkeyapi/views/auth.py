@@ -69,6 +69,6 @@ def register_user(request):
     data = { 'token': token.key }
     return Response(data)
 
-    #setup new authenication like level up instead of gamer it's author
+    #setup new authentication like level up instead of gamer it's author
     #then delete database and remigrate data
     #git ignore database and migrations
