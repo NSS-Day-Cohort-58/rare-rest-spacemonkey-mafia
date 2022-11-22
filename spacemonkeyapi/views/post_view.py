@@ -61,7 +61,7 @@ class PostView(ViewSet):
         #~ these will need to be updated once the Authentication is Running.
         author = RareUser.objects.get(user=request.auth.user)
         category = Category.objects.get(pk=request.data["category"])
-        tag = Tag.objects.get(pk=request.data["tag"])
+        # tag = Tag.objects.get(pk=request.data["tag"])
 
         post = Post.objects.create(
             author=author,
@@ -70,7 +70,7 @@ class PostView(ViewSet):
             publication_date=request.data["publication_date"],
             image_url=request.data["image_url"],
             content=request.data["content"],
-            tag=tag,
+            # tag=tag,
             approved=request.data["approved"],
         )
         serializer = PostSerializer(post)
