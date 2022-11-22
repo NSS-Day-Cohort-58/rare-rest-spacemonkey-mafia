@@ -24,5 +24,31 @@
             "content": "What about that space content",
             "approved": "True"
         }
+    },
+    {
+        "model": "spacemonkeyapi.post",
+        "pk": 3,
+        "fields": {
+            "author": 1,
+            "category": 2,
+            "title": "The Dark Side Of Space Mafioso",
+            "publication_date": "2022-11-14",
+            "image_url": "https://pbs.twimg.com/profile_images/634010315596795905/DMPti4T5_400x400.jpg",
+            "content": "Mando's fight again mob ties",
+            "approved": "True"
+        }
+    },
+    {
+        "model": "spacemonkeyapi.post",
+        "pk": 4,
+        "fields": {
+            "author": 1,
+            "category": 2,
+            "title": "Mando's fight again Vaderism the coolest bad guys on set",
+            "publication_date": "2022-11-14",
+            "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLhQ0Dnz33ZYgcCirEA3WYhVjupSQNAbd55i5arsYAw8fhFHajQFNoLwSrOexbT6vgz3k&usqp=CAU",
+            "content": "What about that space content",
+            "approved": "True"
+        }
     }
 ]

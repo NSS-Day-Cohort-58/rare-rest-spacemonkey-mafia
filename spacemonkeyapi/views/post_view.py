@@ -8,6 +8,7 @@ from spacemonkeyapi.models import Post, RareUser, Tag, Comment, Category
 
 
 class PostView(ViewSet):
+    
     # View Single Post
     def retrieve(self, request, pk):
         """Handle GET requests for single post type
@@ -60,7 +61,7 @@ class PostView(ViewSet):
         #~ these will need to be updated once the Authentication is Running.
         author = RareUser.objects.get(user=request.auth.user)
         category = Category.objects.get(pk=request.data["category"])
-        tag = Tag.objects.get(pk=request.data["tag"])
+        # tag = Tag.objects.get(pk=request.data["tag"])
 
         post = Post.objects.create(
             author=author,
@@ -69,13 +70,13 @@ class PostView(ViewSet):
             publication_date=request.data["publication_date"],
             image_url=request.data["image_url"],
             content=request.data["content"],
-            tag=tag,
+            # tag=tag,
             approved=request.data["approved"],
         )
         serializer = PostSerializer(post)
         return Response(serializer.data)
 
-    # Edit Post
+    # Edit Post (PUT)
     def update(self, request, pk):
         """Handle PUT requests for a post
 
@@ -90,8 +91,8 @@ class PostView(ViewSet):
         post.content = request.data["content"]
         post.approved = request.data["approved"]
 
-        # category = Catergory.objects.get(pk=request.data["category"])
-        # post.category = request.data["category"]
+        category = Category.objects.get(pk=request.data["category"])
+        post.category = category
         
         post.save()
 
@@ -119,10 +120,6 @@ class PostView(ViewSet):
             return Response({"Tag has been removed"}, status=status.HTTP_204_NO_CONTENT)
 
 
-# class AuthorSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Author
-#         fields = ('id', 'full_name',)
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
