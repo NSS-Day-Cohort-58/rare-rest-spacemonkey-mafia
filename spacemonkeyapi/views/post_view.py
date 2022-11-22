@@ -8,6 +8,7 @@ from spacemonkeyapi.models import Post, RareUser, Tag, Comment, Category
 
 
 class PostView(ViewSet):
+    
     # View Single Post
     def retrieve(self, request, pk):
         """Handle GET requests for single post type
@@ -75,7 +76,7 @@ class PostView(ViewSet):
         serializer = PostSerializer(post)
         return Response(serializer.data)
 
-    # Edit Post
+    # Edit Post (PUT)
     def update(self, request, pk):
         """Handle PUT requests for a post
 
@@ -90,8 +91,8 @@ class PostView(ViewSet):
         post.content = request.data["content"]
         post.approved = request.data["approved"]
 
-        # category = Catergory.objects.get(pk=request.data["category"])
-        # post.category = request.data["category"]
+        category = Category.objects.get(pk=request.data["category"])
+        post.category = category
         
         post.save()
 
@@ -119,10 +120,6 @@ class PostView(ViewSet):
             return Response({"Tag has been removed"}, status=status.HTTP_204_NO_CONTENT)
 
 
-# class AuthorSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Author
-#         fields = ('id', 'full_name',)
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
